@@ -120,6 +120,11 @@ export default defineConfigWithTheme<DefaultTheme.Config>({
         activeMatch: '^/examples/',
       },
       {
+        text: 'Plugins',
+        link: '/plugins/',
+        activeMatch: '^/plugins/',
+      },
+      {
         text: 'TypeDocs',
         link: '/typedocs/',
         activeMatch: '^/typedocs/',
@@ -224,6 +229,13 @@ export default defineConfigWithTheme<DefaultTheme.Config>({
       ],
       '/typedocs/': typedocSidebarEntries(),
       '/changelog/': changelogSidebarEntries(),
+      '/plugins/': [
+        {
+          text: 'Plugins',
+          collapsible: true,
+          items: [],
+        },
+      ],
     },
   },
 })
