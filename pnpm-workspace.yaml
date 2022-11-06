@@ -1,7 +1,7 @@
 packages:
   - packages/*
+  - packages/custom-elements/*
   - packages/plugins/*
   - examples/*
-  - packages/plugins/*
   - e2e
   - docs
