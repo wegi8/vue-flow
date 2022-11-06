@@ -35,6 +35,8 @@ const { id, edges, viewport, dimensions, emits, nodes, d3Selection, d3Zoom } = u
 
 const el = ref<SVGElement>()
 
+const isDragging = ref(false)
+
 provide(MiniMapSlots, useSlots())
 
 const elementWidth = computed(() => width ?? attrs.style?.width ?? defaultWidth)
@@ -134,6 +136,18 @@ watchEffect(
       const zoomAndPanHandler = zoom()
         .on('zoom', pannable ? panHandler : () => {})
         .on('zoom.wheel', zoomable ? zoomHandler : () => {})
+        .on('start', (event: D3ZoomEvent<HTMLDivElement, any>) => {
+          if (!event.sourceEvent) return null
+
+          if (pannable && event.sourceEvent?.type === 'mousedown') {
+            isDragging.value = true
+          }
+        })
+        .on('end', (event: D3ZoomEvent<HTMLDivElement, any>) => {
+          if (!event.sourceEvent) return null
+
+          isDragging.value = false
+        })
 
       selection.call(zoomAndPanHandler)
 
@@ -188,7 +202,7 @@ export default {
 </script>
 
 <template>
-  <Panel :position="position" class="vue-flow__minimap" :class="{ pannable, zoomable }">
+  <Panel :position="position" class="vue-flow__minimap" :class="{ pannable, zoomable, dragging: isDragging }">
     <svg
       ref="el"
       :width="elementWidth"
@@ -221,7 +235,7 @@ export default {
         @mouseleave="onNodeMouseLeave($event, node)"
       />
 
-      <path class="vue-flow__minimap-mask" :style="pannable ? 'cursor: grab' : ''" :d="d" :fill="maskColor" fill-rule="evenodd" />
+      <path class="vue-flow__minimap-mask" :d="d" :fill="maskColor" fill-rule="evenodd" />
     </svg>
   </Panel>
 </template>
