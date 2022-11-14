@@ -24,6 +24,10 @@
   &.dragging {
      cursor: grabbing;
    }
+
+  &.connecting {
+      cursor: crosshair;
+   }
 }
 
 .vue-flow__transformationpane {
