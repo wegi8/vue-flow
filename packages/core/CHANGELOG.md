@@ -1,5 +1,11 @@
 # @vue-flow/core
 
+## 1.4.2
+
+### Patch Changes
+
+- [#439](https://github.com/bcakmakoglu/vue-flow/pull/439) [`817884e`](https://github.com/bcakmakoglu/vue-flow/commit/817884e71ffb0d555b69d84b5f08f724afe891cf) Thanks [@bcakmakoglu](https://github.com/bcakmakoglu)! - Elevate selected nodes zIndex by 1000 instead to 1000
+
 ## 1.4.1
 
 ### Patch Changes
